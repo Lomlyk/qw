@@ -2,7 +2,7 @@
 
 import unittest
 
-from math_engine import ExpressionEvaluator, FinanceMath, QuadraticSolver, StatisticsService
+from math_engine import ExpressionEvaluator, FinanceMath, GeometryService, NumberTheoryService, QuadraticSolver, StatisticsService
 
 
 class ExpressionEvaluatorTests(unittest.TestCase):
@@ -47,6 +47,26 @@ class FinanceMathTests(unittest.TestCase):
     def test_compound_interest(self) -> None:
         amount = FinanceMath().compound_interest("100000", "12", "3", "12")
         self.assertEqual(str(amount), "143076.88")
+
+
+class NumberTheoryServiceTests(unittest.TestCase):
+    def test_number_theory_summary(self) -> None:
+        result = NumberTheoryService().analyze("24", "36")
+        self.assertEqual(result["gcd"], 12)
+        self.assertEqual(result["lcm"], 72)
+        self.assertFalse(result["a_is_prime"])
+
+
+class GeometryServiceTests(unittest.TestCase):
+    def test_circle(self) -> None:
+        result = GeometryService().circle("2")
+        self.assertAlmostEqual(result["diameter"], 4.0, places=5)
+        self.assertAlmostEqual(result["area"], 12.566370, places=5)
+
+    def test_rectangle(self) -> None:
+        result = GeometryService().rectangle("3", "4")
+        self.assertEqual(result["perimeter"], 14.0)
+        self.assertEqual(result["diagonal"], 5.0)
 
 
 if __name__ == "__main__":
